@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.voxalate">
    <application
-        android:label="voxalate"
+        android:label="Voxalate"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
