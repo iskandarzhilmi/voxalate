@@ -1,0 +1,27 @@
+name: voxalate
+description: A new Flutter project.
+publish_to: 'none'
+version: 1.0.1+2
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  audio_session: ^0.1.10
+  cupertino_icons: ^1.0.2
+  firebase_core: ^1.24.0
+  firebase_storage: ^10.3.10
+  flutter:
+    sdk: flutter
+  flutter_sound: ^9.2.13
+  http: ^0.13.5
+  lint: ^1.10.0
+  path_provider: ^2.0.11
+  permission_handler: ^10.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
