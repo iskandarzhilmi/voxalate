@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:audio_session/audio_session.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:voxalate/firebase_options.dart';
 import 'package:http/http.dart' as http;
+import 'package:permission_handler/permission_handler.dart';
+import 'package:voxalate/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,10 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
   String? predictionId;
 
   bool isRecording = false;
+  bool isShowSummary = false;
 
   @override
   void initState() {
     super.initState();
+    initialiseSession();
     recorder.openRecorder();
   }
 
@@ -102,19 +106,64 @@ class _MyHomePageState extends State<MyHomePage> {
                             if (snapshot.data?.output?.translation != null) {
                               return Column(
                                 children: [
-                                  Text(
+                                  SelectableText(
                                     snapshot.data!.output!.transcription!,
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(snapshot.data!.output!.translation!),
+                                  SelectableText(
+                                    snapshot.data!.output!.translation!,
+                                  ),
+                                  TextButton(
+                                    child: isShowSummary
+                                        ? const Text('Hide')
+                                        : const Text('Show'),
+                                    onPressed: () {
+                                      setState(() {
+                                        isShowSummary = !isShowSummary;
+                                      });
+                                    },
+                                  ),
+                                  if (isShowSummary)
+                                    FutureBuilder<OpenAiCompletion>(
+                                      future: getSummary(
+                                        snapshot.data!.output!.translation!,
+                                      ),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return SelectableText(
+                                            snapshot.data!.choices?[0].text ??
+                                                'null',
+                                          );
+                                        }
+                                        return const SizedBox();
+                                      },
+                                    ),
                                 ],
                               );
                             }
                             if (snapshot.data?.output?.transcription != null) {
-                              return Text(
-                                  snapshot.data!.output!.transcription!);
+                              return Column(
+                                children: [
+                                  SelectableText(
+                                    snapshot.data!.output!.transcription!,
+                                  ),
+                                  FutureBuilder(
+                                    future: getSummary(
+                                      snapshot.data!.output!.transcription!,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return SelectableText(
+                                          (snapshot.data as String?) ?? 'null',
+                                        );
+                                      }
+                                      return const Text('Loading...');
+                                    },
+                                  ),
+                                ],
+                              );
                             }
                             return const Text('Loading...');
                           } else {
@@ -127,6 +176,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ),
@@ -134,16 +186,59 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Future<void> initialiseSession() async {
+    final AudioSession session = await AudioSession.instance;
+    await session.configure(const AudioSessionConfiguration.speech());
+  }
+
   Future<void> startRecording() async {
-    setState(() {
-      isRecording = true;
-      predictionId = null;
-    });
-    if (Platform.isIOS) {
-      final path = await recorder.startRecorder(
-        toFile: 'test.wav',
-        codec: Codec.pcm16WAV,
+    await Permission.microphone.request();
+    await Permission.storage.request();
+
+    final microphoneStatus = await Permission.microphone.status;
+    final storageStatus = await Permission.storage.status;
+
+    if (microphoneStatus.isGranted && storageStatus.isGranted) {
+      final session = await AudioSession.instance;
+      await session.configure(
+        const AudioSessionConfiguration(
+          avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
+          avAudioSessionCategoryOptions:
+              AVAudioSessionCategoryOptions.allowBluetooth,
+          avAudioSessionMode: AVAudioSessionMode.spokenAudio,
+          avAudioSessionRouteSharingPolicy:
+              AVAudioSessionRouteSharingPolicy.defaultPolicy,
+          avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
+          androidAudioAttributes: AndroidAudioAttributes(
+            contentType: AndroidAudioContentType.speech,
+            usage: AndroidAudioUsage.voiceCommunication,
+          ),
+          androidWillPauseWhenDucked: true,
+        ),
       );
+
+      setState(() {
+        isRecording = true;
+        predictionId = null;
+      });
+
+      if (Platform.isAndroid) {
+        await recorder.startRecorder(
+          toFile: 'test.wav',
+          codec: Codec.pcm16WAV,
+        );
+      }
+
+      if (Platform.isIOS) {
+        await recorder.startRecorder(
+          toFile: 'test.wav',
+          codec: Codec.pcm16WAV,
+        );
+        return;
+      }
+      throw Exception('Platform not supported');
+    } else {
+      log('Permissions not granted');
     }
   }
 
@@ -203,7 +298,8 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       );
       final predictionOutput = Prediction.fromJson(
-        jsonDecode(response.body) as Map<String, dynamic>,
+        // utf decode to fix issue with special characters
+        jsonDecode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>,
       );
       yield predictionOutput;
       if (predictionOutput.status == 'succeeded') {
@@ -211,6 +307,57 @@ class _MyHomePageState extends State<MyHomePage> {
       }
       await Future.delayed(const Duration(seconds: 1));
     }
+  }
+
+// curl https://api.openai.com/v1/completions \
+//   -H 'Content-Type: application/json' \
+//   -H 'Authorization: Bearer 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' \
+//   -d '{
+//   "model": "text-davinci-002",
+//   "max_tokens": 3500,
+//   "n":5,
+//   "prompt": "$englishText\nSummarise this:"
+// {
+//   "id": "cmpl-uqkvlQyYK7bGYrRHQ0eXlWi7",
+//   "object": "text_completion",
+//   "created": 1589478378,
+//   "model": "text-davinci-002",
+//   "choices": [
+//     {
+//       "text": "\n\nThis is a test",
+//       "index": 0,
+//       "logprobs": null,
+//       "finish_reason": "length"
+//     }
+//   ],
+//   "usage": {
+//     "prompt_tokens": 5,
+//     "completion_tokens": 6,
+//     "total_tokens": 11
+//   }
+// }
+
+  Future<OpenAiCompletion> getSummary(String englishText) async {
+    final String body = jsonEncode({
+      // 'model': 'text-davinci-002',
+      'model': 'text-curie-001',
+      'max_tokens': 1500,
+      'n': 1,
+      'prompt': '$englishText\nSummarise this:\n',
+    });
+    final response = await http.post(
+      Uri.parse('https://api.openai.com/v1/completions'),
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Content-Type': 'application/json',
+      },
+      body: body,
+    );
+    log('Response: ${response.body}');
+    return OpenAiCompletion.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    );
   }
 
   Future<String> getDownloadUrl() async {
@@ -227,8 +374,9 @@ class _MyHomePageState extends State<MyHomePage> {
         'Content-Type': 'application/json',
       },
     );
-    final json = jsonDecode(response.body);
-    final results = json['results'] as List;
+    final Map<String, dynamic> json =
+        jsonDecode(response.body) as Map<String, dynamic>;
+    final results = json['results'] as List<dynamic>;
     final latestVersion = results.first as Map<String, dynamic>;
     return latestVersion['id'] as String;
   }
@@ -239,8 +387,8 @@ class _MyHomePageState extends State<MyHomePage> {
 class Prediction {
   final String? id;
   final String? version;
-  final String? created_at;
-  final String? completed_at;
+  final String? createdAt;
+  final String? completedAt;
   final String? status;
   final PredictionInput? input;
   final PredictionOutput? output;
@@ -251,8 +399,8 @@ class Prediction {
   Prediction({
     this.id,
     this.version,
-    this.created_at,
-    this.completed_at,
+    this.createdAt,
+    this.completedAt,
     this.status,
     this.input,
     this.output,
@@ -265,8 +413,8 @@ class Prediction {
     return Prediction(
       id: json['id'] as String?,
       version: json['version'] as String?,
-      created_at: json['created_at'] as String?,
-      completed_at: json['completed_at'] as String?,
+      createdAt: json['created_at'] as String?,
+      completedAt: json['completed_at'] as String?,
       status: json['status'] as String?,
       input: json['input'] != null
           ? PredictionInput.fromJson(json['input'] as Map<String, dynamic>)
@@ -335,6 +483,89 @@ class PredictionMetrics {
   factory PredictionMetrics.fromJson(Map<String, dynamic> json) {
     return PredictionMetrics(
       predictTime: json['predict_time'] as double?,
+    );
+  }
+}
+
+class OpenAiCompletion {
+  final String? id;
+  final String? object;
+  final int? created;
+  final String? model;
+  final List<OpenAiCompletionChoice>? choices;
+  final OpenAiCompletionUsage? usage;
+
+  OpenAiCompletion({
+    this.id,
+    this.object,
+    this.created,
+    this.model,
+    this.choices,
+    this.usage,
+  });
+
+  factory OpenAiCompletion.fromJson(Map<String, dynamic> json) {
+    return OpenAiCompletion(
+      id: json['id'] as String?,
+      object: json['object'] as String?,
+      created: json['created'] as int?,
+      model: json['model'] as String?,
+      choices: json['choices'] != null
+          ? (json['choices'] as List<dynamic>)
+              .map(
+                (e) =>
+                    OpenAiCompletionChoice.fromJson(e as Map<String, dynamic>),
+              )
+              .toList()
+          : null,
+      usage: json['usage'] != null
+          ? OpenAiCompletionUsage.fromJson(
+              json['usage'] as Map<String, dynamic>,
+            )
+          : null,
+    );
+  }
+}
+
+class OpenAiCompletionChoice {
+  final String? text;
+  final int? index;
+  final dynamic logprobs;
+  final String? finishReason;
+
+  OpenAiCompletionChoice({
+    this.text,
+    this.index,
+    this.logprobs,
+    this.finishReason,
+  });
+
+  factory OpenAiCompletionChoice.fromJson(Map<String, dynamic> json) {
+    return OpenAiCompletionChoice(
+      text: json['text'] as String?,
+      index: json['index'] as int?,
+      logprobs: json['logprobs'],
+      finishReason: json['finish_reason'] as String?,
+    );
+  }
+}
+
+class OpenAiCompletionUsage {
+  final int? promptTokens;
+  final int? completionTokens;
+  final int? totalTokens;
+
+  OpenAiCompletionUsage({
+    this.promptTokens,
+    this.completionTokens,
+    this.totalTokens,
+  });
+
+  factory OpenAiCompletionUsage.fromJson(Map<String, dynamic> json) {
+    return OpenAiCompletionUsage(
+      promptTokens: json['prompt_tokens'] as int?,
+      completionTokens: json['completion_tokens'] as int?,
+      totalTokens: json['total_tokens'] as int?,
     );
   }
 }

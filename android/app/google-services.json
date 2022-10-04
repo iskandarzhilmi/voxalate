@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:193435076426:android:280fc81bdf13c8c67863b3",
+        "mobilesdk_app_id": "1:193435076426:android:a516f0b74991c55b7863b3",
         "android_client_info": {
-          "package_name": "com.example.voxalate"
+          "package_name": "com.durianator.voxalate"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "193435076426-9oi4jdc16lno17dlvbv31o8si0df6b6q.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "193435076426-4rjo5buf8vmt7uomfatri35ou43rhdr5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.voxalate"
+              }
             }
           ]
         }

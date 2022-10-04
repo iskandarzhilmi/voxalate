@@ -45,17 +45,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyBMHQPQeR3F6z-tOgQIJUKc9tNudDPyfn8',
-    appId: '1:193435076426:web:50406e4b972bb4a77863b3',
+    appId: '1:193435076426:web:21188dd815a450fc7863b3',
     messagingSenderId: '193435076426',
     projectId: 'voxalate',
     authDomain: 'voxalate.firebaseapp.com',
     storageBucket: 'voxalate.appspot.com',
-    measurementId: 'G-VFQMT1ZXRT',
+    measurementId: 'G-XM0M33K54S',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBKBEaQYB16ODykKVc65y4_lG8zbIdOOmQ',
-    appId: '1:193435076426:android:280fc81bdf13c8c67863b3',
+    appId: '1:193435076426:android:a516f0b74991c55b7863b3',
     messagingSenderId: '193435076426',
     projectId: 'voxalate',
     storageBucket: 'voxalate.appspot.com',
@@ -63,21 +63,21 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDpID6x-wtGYYTGqj-IyMEXG-nBLf7BXEQ',
-    appId: '1:193435076426:ios:90dc95bb5e69b5f47863b3',
+    appId: '1:193435076426:ios:cdf7db5b967f06067863b3',
     messagingSenderId: '193435076426',
     projectId: 'voxalate',
     storageBucket: 'voxalate.appspot.com',
-    iosClientId: '193435076426-4rjo5buf8vmt7uomfatri35ou43rhdr5.apps.googleusercontent.com',
-    iosBundleId: 'com.example.voxalate',
+    iosClientId: '193435076426-fd60v3mm2elhbrgtv3fj1croji5l43n0.apps.googleusercontent.com',
+    iosBundleId: 'com.durianator.voxalate',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDpID6x-wtGYYTGqj-IyMEXG-nBLf7BXEQ',
-    appId: '1:193435076426:ios:90dc95bb5e69b5f47863b3',
+    appId: '1:193435076426:ios:cdf7db5b967f06067863b3',
     messagingSenderId: '193435076426',
     projectId: 'voxalate',
     storageBucket: 'voxalate.appspot.com',
-    iosClientId: '193435076426-4rjo5buf8vmt7uomfatri35ou43rhdr5.apps.googleusercontent.com',
-    iosBundleId: 'com.example.voxalate',
+    iosClientId: '193435076426-fd60v3mm2elhbrgtv3fj1croji5l43n0.apps.googleusercontent.com',
+    iosBundleId: 'com.durianator.voxalate',
   );
 }

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.voxalate">
+    package="com.durianator.voxalate">
    <application
         android:label="Voxalate"
         android:name="${applicationName}"

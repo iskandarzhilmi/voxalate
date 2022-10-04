@@ -1,4 +1,4 @@
-package com.example.voxalate
+package com.durianator.voxalate
 
 import io.flutter.embedding.android.FlutterActivity
 
