@@ -227,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
           toFile: 'test.wav',
           codec: Codec.pcm16WAV,
         );
+        return;
       }
 
       if (Platform.isIOS) {

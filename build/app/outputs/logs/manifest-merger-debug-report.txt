@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:3:4-33:19
+INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:3:4-34:19
 MERGED from [:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
@@ -32,15 +32,16 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/iska
 	android:name
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
-INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
-INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
-INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
-MERGED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
+ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
+INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
+INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
+INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
+MERGED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
 MERGED from [:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [:permission_handler_android] /Users/iskandarzhilmi/StudioProjects/voxalate/build/permission_handler_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:path_provider_android] /Users/iskandarzhilmi/StudioProjects/voxalate/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:audio_session] /Users/iskandarzhilmi/StudioProjects/voxalate/build/audio_session/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:flutter_sound] /Users/iskandarzhilmi/StudioProjects/voxalate/build/flutter_sound/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/21b26ef90e71324700151bde7e8603b7/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:17:1-33:12
@@ -49,6 +50,8 @@ MERGED from [com.google.firebase:firebase-appcheck-interop:16.0.1] /Users/iskand
 MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/81d7cd07d8865cdf0ad08eaef96c063c/transformed/jetified-firebase-auth-interop-18.0.0/AndroidManifest.xml:2:1-10:12
 MERGED from [com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:15:1-40:12
 MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/iskandarzhilmi/.gradle/caches/transforms-3/c2dce3a51e0dbc1dd3326ee074fc0ad3/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:2:1-18:12
+MERGED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:17:1-36:12
+MERGED from [androidx.media2:media2-common:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/5c91b79626dae0e7154e46bdb2318632/transformed/jetified-media2-common-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:17:1-30:12
 MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e2ca1875773b5daafb4d0b71c933b954/transformed/appcompat-1.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:16:1-24:12
@@ -80,27 +83,27 @@ INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debu
 INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml:1:1-8:12
 INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml:1:1-8:12
 	package
-		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:2:5-35
+		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:2:5-38
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
+		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-36:12
+		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:1-37:12
 		INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.RECORD_AUDIO
-ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:34:5-71
+ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:5-71
 	android:name
-		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:34:22-68
+		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:22-68
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:5-81
+ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:36:5-81
 	android:name
-		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:22-78
+		ADDED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:36:22-78
 uses-sdk
 INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml
@@ -113,6 +116,8 @@ MERGED from [:permission_handler_android] /Users/iskandarzhilmi/StudioProjects/v
 MERGED from [:permission_handler_android] /Users/iskandarzhilmi/StudioProjects/voxalate/build/permission_handler_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:path_provider_android] /Users/iskandarzhilmi/StudioProjects/voxalate/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:path_provider_android] /Users/iskandarzhilmi/StudioProjects/voxalate/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:audio_session] /Users/iskandarzhilmi/StudioProjects/voxalate/build/audio_session/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:audio_session] /Users/iskandarzhilmi/StudioProjects/voxalate/build/audio_session/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_sound] /Users/iskandarzhilmi/StudioProjects/voxalate/build/flutter_sound/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [:flutter_sound] /Users/iskandarzhilmi/StudioProjects/voxalate/build/flutter_sound/intermediates/merged_manifest/debug/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.window:window-java:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/21b26ef90e71324700151bde7e8603b7/transformed/jetified-window-java-1.0.0-beta04/AndroidManifest.xml:19:5-21:41
@@ -129,6 +134,10 @@ MERGED from [com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.
 MERGED from [com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:20:5-22:41
 MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/iskandarzhilmi/.gradle/caches/transforms-3/c2dce3a51e0dbc1dd3326ee074fc0ad3/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:7:5-9:41
 MERGED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/iskandarzhilmi/.gradle/caches/transforms-3/c2dce3a51e0dbc1dd3326ee074fc0ad3/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media2:media2-common:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/5c91b79626dae0e7154e46bdb2318632/transformed/jetified-media2-common-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media2:media2-common:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/5c91b79626dae0e7154e46bdb2318632/transformed/jetified-media2-common-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e2ca1875773b5daafb4d0b71c933b954/transformed/appcompat-1.2.0/AndroidManifest.xml:20:5-22:41
@@ -272,13 +281,27 @@ ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/iskandarzhilm
 	android:name
 		ADDED from [com.github.canardoux:flutter_sound_core:9.2.13] /Users/iskandarzhilmi/.gradle/caches/transforms-3/c2dce3a51e0dbc1dd3326ee074fc0ad3/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:13:22-77
 queries
-ADDED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:24:5-28:15
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:24:5-34:15
+MERGED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:24:5-28:15
+MERGED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:24:5-28:15
 intent#action:name:android.media.browse.MediaBrowserService
-ADDED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:25:9-27:18
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:25:9-27:18
 action#android.media.browse.MediaBrowserService
-ADDED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:26:13-79
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:26:13-79
 	android:name
-		ADDED from [androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:26:21-76
+		ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:26:21-76
+intent#action:name:androidx.media2.session.MediaSessionService
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:28:9-30:18
+action#androidx.media2.session.MediaSessionService
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:29:13-82
+	android:name
+		ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:29:21-79
+intent#action:name:androidx.media2.session.MediaLibraryService
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:31:9-33:18
+action#androidx.media2.session.MediaLibraryService
+ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:32:13-82
+	android:name
+		ADDED from [androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:32:21-79
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
 	android:exported

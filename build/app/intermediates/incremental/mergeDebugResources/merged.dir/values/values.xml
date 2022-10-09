@@ -328,14 +328,19 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="default_notification_channel_name">Now playing</string>
     <string name="default_web_client_id" translatable="false">193435076426-9oi4jdc16lno17dlvbv31o8si0df6b6q.apps.googleusercontent.com</string>
     <string name="gcm_defaultSenderId" translatable="false">193435076426</string>
     <string name="google_api_key" translatable="false">AIzaSyBKBEaQYB16ODykKVc65y4_lG8zbIdOOmQ</string>
-    <string name="google_app_id" translatable="false">1:193435076426:android:280fc81bdf13c8c67863b3</string>
+    <string name="google_app_id" translatable="false">1:193435076426:android:a516f0b74991c55b7863b3</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBKBEaQYB16ODykKVc65y4_lG8zbIdOOmQ</string>
     <string name="google_storage_bucket" translatable="false">voxalate.appspot.com</string>
+    <string name="pause_button_content_description">Pause</string>
+    <string name="play_button_content_description">Play</string>
     <string name="project_id" translatable="false">voxalate</string>
     <string name="search_menu_title">Search</string>
+    <string name="skip_to_next_item_button_content_description">Skip to next item</string>
+    <string name="skip_to_previous_item_button_content_description">Skip to previous item</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>

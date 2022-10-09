@@ -1,8 +1,8 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.voxalate"
-4    android:versionCode="1"
-5    android:versionName="1.0.0" >
+3    package="com.durianator.voxalate"
+4    android:versionCode="2"
+5    android:versionName="1.0.1" >
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
@@ -16,11 +16,11 @@
 15-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml:7:5-66
 15-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/debug/AndroidManifest.xml:7:22-64
 16    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-16-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:34:5-71
-16-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:34:22-68
+16-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:5-71
+16-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:22-68
 17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
-17-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:5-81
-17-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:35:22-78
+17-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:36:5-81
+17-->/Users/iskandarzhilmi/StudioProjects/voxalate/android/app/src/main/AndroidManifest.xml:36:22-78
 18    <!-- <uses-sdk android:minSdkVersion="14"/> -->
 19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 19-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:26:5-79
@@ -36,124 +36,137 @@
 22-->[com.github.canardoux:flutter_sound_core:9.2.13] /Users/iskandarzhilmi/.gradle/caches/transforms-3/c2dce3a51e0dbc1dd3326ee074fc0ad3/transformed/jetified-flutter_sound_core-9.2.13/AndroidManifest.xml:13:22-77
 23
 24    <queries>
-24-->[androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:24:5-28:15
+24-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:24:5-34:15
 25        <intent>
-25-->[androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:25:9-27:18
+25-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:25:9-27:18
 26            <action android:name="android.media.browse.MediaBrowserService" />
-26-->[androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:26:13-79
-26-->[androidx.media:media:1.4.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/2fecd0045a1473b479fadfd3a8e6cf4e/transformed/media-1.4.1/AndroidManifest.xml:26:21-76
+26-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:26:13-79
+26-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:26:21-76
 27        </intent>
-28    </queries>
-29
-30    <application
-31        android:name="android.app.Application"
-32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-32-->[androidx.core:core:1.6.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/b11c0e2c212c747cb4bcf29314469768/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
-33        android:debuggable="true"
-34        android:icon="@mipmap/ic_launcher"
-35        android:label="Voxalate" >
-36        <activity
-37            android:name="com.example.voxalate.MainActivity"
-38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-39            android:exported="true"
-40            android:hardwareAccelerated="true"
-41            android:launchMode="singleTop"
-42            android:theme="@style/LaunchTheme"
-43            android:windowSoftInputMode="adjustResize" >
-44
-45            <!--
-46                 Specifies an Android theme to apply to this Activity as soon as
-47                 the Android process has started. This theme is visible to the user
-48                 while the Flutter UI initializes. After that, this theme continues
-49                 to determine the Window background behind the Flutter UI.
-50            -->
-51            <meta-data
-52                android:name="io.flutter.embedding.android.NormalTheme"
-53                android:resource="@style/NormalTheme" />
-54
-55            <intent-filter>
-56                <action android:name="android.intent.action.MAIN" />
-57
-58                <category android:name="android.intent.category.LAUNCHER" />
-59            </intent-filter>
-60        </activity>
-61        <!--
-62             Don't delete the meta-data below.
-63             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-64        -->
-65        <meta-data
-66            android:name="flutterEmbedding"
-67            android:value="2" />
-68
-69        <service
-69-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
-70            android:name="com.google.firebase.components.ComponentDiscoveryService"
-70-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
-71            android:directBootAware="true"
-71-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:35:13-43
-72            android:exported="false" >
-72-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:32:13-37
-73            <meta-data
-73-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
-74                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
-74-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
-75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
-76            <meta-data
-76-->[:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
-77                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-77-->[:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
-78                android:value="com.google.firebase.components.ComponentRegistrar" />
-78-->[:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
-79            <meta-data
-79-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:33:13-35:85
-80                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-80-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:34:17-107
-81                android:value="com.google.firebase.components.ComponentRegistrar" />
-81-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:35:17-82
-82        </service>
-83
-84        <uses-library
-84-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-85            android:name="androidx.window.extensions"
-85-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-86            android:required="false" />
-86-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-87        <uses-library
-87-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-88            android:name="androidx.window.sidecar"
-88-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-89            android:required="false" />
-89-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+28        <intent>
+28-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:28:9-30:18
+29            <action android:name="androidx.media2.session.MediaSessionService" />
+29-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:29:13-82
+29-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:29:21-79
+30        </intent>
+31        <intent>
+31-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:31:9-33:18
+32            <action android:name="androidx.media2.session.MediaLibraryService" />
+32-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:32:13-82
+32-->[androidx.media2:media2-session:1.2.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/41e8f6997eb4e0c8c67b635c05987b2d/transformed/jetified-media2-session-1.2.0/AndroidManifest.xml:32:21-79
+33        </intent>
+34    </queries>
+35
+36    <application
+37        android:name="android.app.Application"
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.6.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/b11c0e2c212c747cb4bcf29314469768/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+39        android:debuggable="true"
+40        android:icon="@mipmap/ic_launcher"
+41        android:label="Voxalate"
+42        android:requestLegacyExternalStorage="true" >
+43        <activity
+44            android:name="com.durianator.voxalate.MainActivity"
+45            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+46            android:exported="true"
+47            android:hardwareAccelerated="true"
+48            android:launchMode="singleTop"
+49            android:theme="@style/LaunchTheme"
+50            android:windowSoftInputMode="adjustResize" >
+51
+52            <!--
+53                 Specifies an Android theme to apply to this Activity as soon as
+54                 the Android process has started. This theme is visible to the user
+55                 while the Flutter UI initializes. After that, this theme continues
+56                 to determine the Window background behind the Flutter UI.
+57            -->
+58            <meta-data
+59                android:name="io.flutter.embedding.android.NormalTheme"
+60                android:resource="@style/NormalTheme" />
+61
+62            <intent-filter>
+63                <action android:name="android.intent.action.MAIN" />
+64
+65                <category android:name="android.intent.category.LAUNCHER" />
+66            </intent-filter>
+67        </activity>
+68        <!--
+69             Don't delete the meta-data below.
+70             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+71        -->
+72        <meta-data
+73            android:name="flutterEmbedding"
+74            android:value="2" />
+75
+76        <service
+76-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:19
+77            android:name="com.google.firebase.components.ComponentDiscoveryService"
+77-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:10:18-89
+78            android:directBootAware="true"
+78-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:35:13-43
+79            android:exported="false" >
+79-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:32:13-37
+80            <meta-data
+80-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+81                android:name="com.google.firebase.components:io.flutter.plugins.firebase.storage.FlutterFirebaseAppRegistrar"
+81-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-126
+82                android:value="com.google.firebase.components.ComponentRegistrar" />
+82-->[:firebase_storage] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_storage/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+83            <meta-data
+83-->[:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-13:85
+84                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+84-->[:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:12:17-124
+85                android:value="com.google.firebase.components.ComponentRegistrar" />
+85-->[:firebase_core] /Users/iskandarzhilmi/StudioProjects/voxalate/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:13:17-82
+86            <meta-data
+86-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:33:13-35:85
+87                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+87-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:34:17-107
+88                android:value="com.google.firebase.components.ComponentRegistrar" />
+88-->[com.google.firebase:firebase-storage:20.0.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/d775623b72cee3cf91cb189bc8158ef9/transformed/jetified-firebase-storage-20.0.2/AndroidManifest.xml:35:17-82
+89        </service>
 90
-91        <provider
-91-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:26:9-31:39
-92            android:name="com.google.firebase.provider.FirebaseInitProvider"
-92-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:27:13-77
-93            android:authorities="com.example.voxalate.firebaseinitprovider"
-93-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:28:13-72
-94            android:directBootAware="true"
-94-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:29:13-43
-95            android:exported="false"
-95-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:30:13-37
-96            android:initOrder="100" />
-96-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:31:13-36
+91        <uses-library
+91-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+92            android:name="androidx.window.extensions"
+92-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+93            android:required="false" />
+93-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+94        <uses-library
+94-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+95            android:name="androidx.window.sidecar"
+95-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+96            android:required="false" />
+96-->[androidx.window:window:1.0.0-beta04] /Users/iskandarzhilmi/.gradle/caches/transforms-3/e1f53c96aa78f7b42431169b7cd59214/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
 97
-98        <activity
-98-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-99            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-99-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-100            android:exported="false"
-100-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-101            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-101-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-102
-103        <meta-data
-103-->[com.google.android.gms:play-services-basement:18.1.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/83770efba2c122ac4d7bf3f6e3fc9396/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
-104            android:name="com.google.android.gms.version"
-104-->[com.google.android.gms:play-services-basement:18.1.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/83770efba2c122ac4d7bf3f6e3fc9396/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
-105            android:value="@integer/google_play_services_version" />
-105-->[com.google.android.gms:play-services-basement:18.1.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/83770efba2c122ac4d7bf3f6e3fc9396/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
-106    </application>
-107
-108</manifest>
+98        <provider
+98-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:26:9-31:39
+99            android:name="com.google.firebase.provider.FirebaseInitProvider"
+99-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:27:13-77
+100            android:authorities="com.durianator.voxalate.firebaseinitprovider"
+100-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:28:13-72
+101            android:directBootAware="true"
+101-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:29:13-43
+102            android:exported="false"
+102-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:30:13-37
+103            android:initOrder="100" />
+103-->[com.google.firebase:firebase-common:20.1.2] /Users/iskandarzhilmi/.gradle/caches/transforms-3/3b375b838d2a06401b054f2bb0469829/transformed/jetified-firebase-common-20.1.2/AndroidManifest.xml:31:13-36
+104
+105        <activity
+105-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+106            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+106-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+107            android:exported="false"
+107-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+108            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+108-->[com.google.android.gms:play-services-base:18.0.1] /Users/iskandarzhilmi/.gradle/caches/transforms-3/1a2cb69c9228e95e429c828957f3a3b6/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+109
+110        <meta-data
+110-->[com.google.android.gms:play-services-basement:18.1.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/83770efba2c122ac4d7bf3f6e3fc9396/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+111            android:name="com.google.android.gms.version"
+111-->[com.google.android.gms:play-services-basement:18.1.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/83770efba2c122ac4d7bf3f6e3fc9396/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+112            android:value="@integer/google_play_services_version" />
+112-->[com.google.android.gms:play-services-basement:18.1.0] /Users/iskandarzhilmi/.gradle/caches/transforms-3/83770efba2c122ac4d7bf3f6e3fc9396/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+113    </application>
+114
+115</manifest>

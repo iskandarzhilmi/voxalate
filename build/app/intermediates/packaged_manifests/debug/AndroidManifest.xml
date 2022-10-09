@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.voxalate"
-    android:versionCode="1"
-    android:versionName="1.0.0" >
+    package="com.durianator.voxalate"
+    android:versionCode="2"
+    android:versionName="1.0.1" >
 
     <uses-sdk
         android:minSdkVersion="21"
@@ -25,6 +25,12 @@
         <intent>
             <action android:name="android.media.browse.MediaBrowserService" />
         </intent>
+        <intent>
+            <action android:name="androidx.media2.session.MediaSessionService" />
+        </intent>
+        <intent>
+            <action android:name="androidx.media2.session.MediaLibraryService" />
+        </intent>
     </queries>
 
     <application
@@ -32,9 +38,10 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Voxalate" >
+        android:label="Voxalate"
+        android:requestLegacyExternalStorage="true" >
         <activity
-            android:name="com.example.voxalate.MainActivity"
+            android:name="com.durianator.voxalate.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -90,7 +97,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.example.voxalate.firebaseinitprovider"
+            android:authorities="com.durianator.voxalate.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
