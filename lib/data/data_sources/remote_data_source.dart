@@ -82,8 +82,8 @@ class RemoteDataSourceImplementation implements RemoteDataSource {
   @override
   Future<OpenAiCompletionModel> getSummary(String englishText) async {
     final String body = jsonEncode({
-      // 'model': 'text-davinci-002',
-      'model': 'text-curie-001',
+      'model': 'text-davinci-002',
+      // 'model': 'text-curie-001',
       'max_tokens': 1500,
       'n': 1,
       'prompt': '$englishText\nSummarise this:\n',
