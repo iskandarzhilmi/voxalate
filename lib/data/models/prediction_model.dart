@@ -80,8 +80,8 @@ class PredictionOutput {
 
   factory PredictionOutput.fromJson(Map<String, dynamic> json) {
     return PredictionOutput(
-      translation: json['translation'] as String?,
-      transcription: json['transcription'] as String?,
+      translation: (json['translation'] as String?)?.trim(),
+      transcription: (json['transcription'] as String?)?.trim(),
       detectedLanguage: json['detected_language'] as String?,
     );
   }

@@ -29,7 +29,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Voxalate',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: const Color(0xFF25B2C2),
+            // secondary: const Color(0xFFE0E0E0),
+            secondary: const Color(0xFF2B3C96),
+          ),
+          // accentColor: const Color(0XFF2D2D2D),
         ),
         home: const HomePage(title: 'Voxalate - Transcribe and Translate'),
       ),

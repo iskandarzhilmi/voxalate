@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:voxalate/data/models/open_ai_completion_model.dart';
 import 'package:voxalate/data/models/prediction_model.dart';
 import 'package:voxalate/presentation/bloc/transcribe_bloc.dart';
@@ -29,7 +30,6 @@ class _HomePageState extends State<HomePage> {
   String? predictionId;
 
   bool isRecording = false;
-  bool isShowSummary = false;
 
   @override
   void initState() {
@@ -78,8 +78,12 @@ class _HomePageState extends State<HomePage> {
                         }
                       },
                       icon: isRecording
-                          ? const Icon(Icons.stop)
-                          : const Icon(Icons.mic),
+                          ? const Icon(
+                              Icons.stop,
+                            )
+                          : const Icon(
+                              Icons.mic,
+                            ),
                     ),
                   ],
                 ),
@@ -92,29 +96,76 @@ class _HomePageState extends State<HomePage> {
                   if (state is TranscribeInitial) {
                     return const Text('Press the button to start recording');
                   } else if (state is TranscribeLoading) {
-                    return const CircularProgressIndicator();
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: 20,
+                            width: 100,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: 50,
+                            width: double.infinity,
+                          ),
+                        ),
+                      ],
+                    );
                   } else if (state is TranscribeLoaded) {
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        const Text(
+                          'Transcription',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         SelectableText(state.transcribeOutput.transcription),
                         const SizedBox(
                           height: 20,
                         ),
-                        SelectableText(
-                          state.transcribeOutput.translation ?? '',
+                        if (state.transcribeOutput.translation != null)
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Translation',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SelectableText(
+                                  state.transcribeOutput.translation!),
+                            ],
+                          ),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isShowSummary = !isShowSummary;
-                            });
-                          },
-                          child: isShowSummary
-                              ? const Text('Hide Summary')
-                              : const Text('Show Summary'),
+                        const Text(
+                          'Summary',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        if (isShowSummary)
-                          Text(state.transcribeOutput.summary ?? ''),
+                        SelectableText(state.transcribeOutput.summary ?? ''),
                       ],
                     );
                   } else if (state is TranscribeError) {

@@ -86,7 +86,7 @@ class RemoteDataSourceImplementation implements RemoteDataSource {
       // 'model': 'text-curie-001',
       'max_tokens': 1500,
       'n': 1,
-      'prompt': '$englishText\nSummarise this:\n',
+      'prompt': '$englishText\nSummarise this:\n\n',
     });
     final response = await http.post(
       Uri.parse('https://api.openai.com/v1/completions'),

@@ -53,7 +53,7 @@ class OpenAiCompletionChoice {
 
   factory OpenAiCompletionChoice.fromJson(Map<String, dynamic> json) {
     return OpenAiCompletionChoice(
-      text: json['text'] as String?,
+      text: (json['text'] as String?)?.trim(),
       index: json['index'] as int?,
       logprobs: json['logprobs'],
       finishReason: json['finish_reason'] as String?,
