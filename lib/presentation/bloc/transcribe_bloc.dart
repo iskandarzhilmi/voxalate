@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voxalate/domain/entities/transcribe_output.dart';
 import 'package:voxalate/domain/use_cases/get_transcribe_output.dart';
-import 'package:voxalate/failures.dart';
+import 'package:voxalate/failure.dart';
 
 part 'transcribe_event.dart';
 part 'transcribe_state.dart';

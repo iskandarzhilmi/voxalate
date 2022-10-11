@@ -62,9 +62,6 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text(
-                      'Tap the button to start recording',
-                    ),
                     const SizedBox(
                       height: 50,
                     ),
@@ -126,47 +123,80 @@ class _HomePageState extends State<HomePage> {
                             width: double.infinity,
                           ),
                         ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: 20,
+                            width: 100,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height: 50,
+                            width: double.infinity,
+                          ),
+                        ),
                       ],
                     );
                   } else if (state is TranscribeLoaded) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Transcription',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                    return SizedBox(
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Transcription',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SelectableText(state.transcribeOutput.transcription),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        if (state.transcribeOutput.translation != null)
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Translation',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
+                          SelectableText(state.transcribeOutput.transcription),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          if (state.transcribeOutput.translation != null)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Translation',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              SelectableText(
-                                  state.transcribeOutput.translation!),
-                            ],
+                                SelectableText(
+                                    state.transcribeOutput.translation!),
+                              ],
+                            ),
+                          const SizedBox(
+                            height: 20,
                           ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        const Text(
-                          'Summary',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                          const Text(
+                            'Summary',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        SelectableText(state.transcribeOutput.summary ?? ''),
-                      ],
+                          SelectableText(state.transcribeOutput.summary ?? ''),
+                        ],
+                      ),
                     );
                   } else if (state is TranscribeError) {
                     return Text(state.message);

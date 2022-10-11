@@ -5,7 +5,7 @@ import 'package:voxalate/data/data_sources/remote_data_source.dart';
 import 'package:voxalate/domain/entities/transcribe_output.dart';
 import 'package:voxalate/domain/repositories/repository.dart';
 import 'package:voxalate/exception.dart';
-import 'package:voxalate/failures.dart';
+import 'package:voxalate/failure.dart';
 
 class RepositoryImplementation implements Repository {
   final RemoteDataSource remoteDataSource;
