@@ -45,7 +45,11 @@
     <string name="common_open_on_phone">மொபைலில் திற</string>
     <string name="common_signin_button_text">உள்நுழைக</string>
     <string name="common_signin_button_text_long">Google மூலம் உள்நுழைக</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"கிளிப்-போர்டுக்கு இணைப்பு நகலெடுக்கப்பட்டது"</string>
     <string msgid="7213672915724563695" name="default_notification_channel_name">"இப்போது பிளே செய்வது"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"இணைப்பை நகலெடு"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"உலாவியில் திற"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"இணைப்பைப் பகிர்"</string>
     <string msgid="3510124037191104584" name="pause_button_content_description">"இடைநிறுத்தும்"</string>
     <string msgid="963503759453979404" name="play_button_content_description">"பிளே செய்யும்"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"தேடல்"</string>

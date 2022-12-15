@@ -2,12 +2,10 @@
 FLUTTER_ROOT=/Users/iskandarzhilmi/development/flutter
 FLUTTER_APPLICATION_PATH=/Users/iskandarzhilmi/StudioProjects/voxalate
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=/Users/iskandarzhilmi/StudioProjects/voxalate/lib/main.dart
 FLUTTER_BUILD_DIR=build
-FLUTTER_BUILD_NAME=1.0.0
-FLUTTER_BUILD_NUMBER=1
-DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==
+FLUTTER_BUILD_NAME=1.0.2
+FLUTTER_BUILD_NUMBER=3
 DART_OBFUSCATION=false
 TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=/Users/iskandarzhilmi/StudioProjects/voxalate/.dart_tool/package_config.json
+PACKAGE_CONFIG=.dart_tool/package_config.json

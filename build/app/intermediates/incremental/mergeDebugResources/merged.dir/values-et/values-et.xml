@@ -45,7 +45,11 @@
     <string name="common_open_on_phone">Ava telefonis</string>
     <string name="common_signin_button_text">Logi sisse</string>
     <string name="common_signin_button_text_long">Logi sisse Google\'i kontoga</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Link kopeeriti lõikelauale"</string>
     <string msgid="7213672915724563695" name="default_notification_channel_name">"Hetkel mängimas"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Kopeeri link"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Ava brauseris"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Jaga linki"</string>
     <string msgid="3510124037191104584" name="pause_button_content_description">"Peatamine"</string>
     <string msgid="963503759453979404" name="play_button_content_description">"Esitamine"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Otsing"</string>

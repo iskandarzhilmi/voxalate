@@ -45,7 +45,11 @@
     <string name="common_open_on_phone">Obre al telèfon</string>
     <string name="common_signin_button_text">Inicia sessió</string>
     <string name="common_signin_button_text_long">Inicia la sessió amb Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"S\'ha copiat l\'enllaç al porta-retalls"</string>
     <string msgid="7213672915724563695" name="default_notification_channel_name">"Està sonant"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Copia l\'enllaç"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Obre al navegador"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Comparteix l\'enllaç"</string>
     <string msgid="3510124037191104584" name="pause_button_content_description">"Posa en pausa"</string>
     <string msgid="963503759453979404" name="play_button_content_description">"Reprodueix"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Cerca"</string>

@@ -45,7 +45,11 @@
     <string name="common_open_on_phone">Atidaryti telefone</string>
     <string name="common_signin_button_text">Prisijungti</string>
     <string name="common_signin_button_text_long">Prisijungti naudojant „Google“</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Nuoroda nukopijuota į iškarpinę"</string>
     <string msgid="7213672915724563695" name="default_notification_channel_name">"Dabar leidžiama"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Kopijuoti nuorodą"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Atidaryti naršyklėje"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Bendrinti nuorodą"</string>
     <string msgid="3510124037191104584" name="pause_button_content_description">"Pristabdyti"</string>
     <string msgid="963503759453979404" name="play_button_content_description">"Leisti"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Ieškoti"</string>

@@ -45,7 +45,11 @@
     <string name="common_open_on_phone">फ़ोन पर खोलें</string>
     <string name="common_signin_button_text">साइन इन करें</string>
     <string name="common_signin_button_text_long">Google के ज़रिए साइन इन करें</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"लिंक क्लिपबोर्ड पर कॉपी किया गया"</string>
     <string msgid="7213672915724563695" name="default_notification_channel_name">"अभी चल रहा है"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"लिंक कॉपी करें"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"ब्राउज़र में खोलें"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"लिंक शेयर करें"</string>
     <string msgid="3510124037191104584" name="pause_button_content_description">"रोकें"</string>
     <string msgid="963503759453979404" name="play_button_content_description">"चलाएं"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"खोजें"</string>

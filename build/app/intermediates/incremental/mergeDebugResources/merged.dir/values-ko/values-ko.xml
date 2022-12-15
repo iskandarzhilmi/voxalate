@@ -45,7 +45,11 @@
     <string name="common_open_on_phone">스마트폰에서 열기</string>
     <string name="common_signin_button_text">로그인</string>
     <string name="common_signin_button_text_long">Google 계정으로 로그인</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"클립보드에 링크 복사됨"</string>
     <string msgid="7213672915724563695" name="default_notification_channel_name">"지금 재생 중인 미디어 이름"</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"링크 복사"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"브라우저에서 열기"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"링크 공유"</string>
     <string msgid="3510124037191104584" name="pause_button_content_description">"일시중지"</string>
     <string msgid="963503759453979404" name="play_button_content_description">"재생"</string>
     <string msgid="6264217191555673260" name="search_menu_title">"검색"</string>

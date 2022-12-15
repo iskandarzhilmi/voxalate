@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:audio_session/audio_session.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -204,6 +205,25 @@ class _HomePageState extends State<HomePage> {
                     return const Text('Something went wrong');
                   }
                 },
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/history');
+                },
+                child: const Text('History'),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // context.read<AuthenticationBloc>().add(LoggedOut());
+                  FirebaseAuth.instance.signOut();
+                },
+                child: const Text('Sign Out'),
               ),
               const SizedBox(
                 height: 100,
