@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,12 @@ class LoginPage extends StatelessWidget {
       builder: BotToastInit(),
       title: 'Voxalate Login',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xFF25B2C2),
+          // secondary: const Color(0xFFE0E0E0),
+          secondary: const Color(0xFF2B3C96),
+        ),
+        // accentColor: const Color(0XFF2D2D2D),
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -124,7 +130,7 @@ class _LoginFormState extends State<LoginForm> {
                 if (_formKey.currentState!.validate()) {
                   try {
                     // Replace 'email' and 'password' with the user's email and password.
-
+                    BotToast.showLoading();
                     UserCredential userCredential = await loginWithFirebase(
                       email: _emailController.text,
                       password: _passwordController.text,
@@ -253,13 +259,22 @@ class _SignUpFormState extends State<SignUpForm> {
                       if (_formKey.currentState!.validate()) {
                         try {
                           // Replace 'email' and 'password' with the user's email and password.
-
-                          UserCredential userCredential =
+                          BotToast.showLoading();
+                          final UserCredential userCredential =
                               await signUpWithFirebase(
                             name: _nameController.text,
                             email: _emailController.text,
                             password: _passwordController.text,
                           );
+
+                          // create a firestore user inside /users collection
+                          await FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(userCredential.user?.uid)
+                              .set({
+                            'isPaidUser': false,
+                            'speechSummarisationUsesLeft': 10,
+                          });
 
                           // Show a toast notification to confirm the login was successful.
                           BotToast.showText(

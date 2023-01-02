@@ -9,6 +9,7 @@ environment:
 dependencies:
   audio_session: ^0.1.10
   bot_toast: ^4.0.3
+  cloud_firestore: ^3.5.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   equatable: ^2.0.5

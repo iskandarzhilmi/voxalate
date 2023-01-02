@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:audio_session/audio_session.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,9 @@ class _HomePageState extends State<HomePage> {
 
   bool isRecording = false;
 
+  final Stream<QuerySnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('users').snapshots();
+
   @override
   void initState() {
     super.initState();
@@ -58,6 +63,31 @@ class _HomePageState extends State<HomePage> {
             children: [
               const SizedBox(
                 height: 100,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _usersStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text(snapshot.error.toString());
+                  }
+
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('Loading');
+                  }
+
+                  // if document id equals user id, get the usage left
+                  final usageLeft = snapshot.data!.docs
+                      .where(
+                        (element) =>
+                            element.id ==
+                            FirebaseAuth.instance.currentUser!.uid,
+                      )
+                      .first
+                      .get('speechSummarisationUsesLeft');
+                  return Text(
+                    'Usage left: ${usageLeft.toString()}',
+                  );
+                },
               ),
               Center(
                 child: Column(
@@ -209,12 +239,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 50,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/history');
-                },
-                child: const Text('History'),
-              ),
               SizedBox(
                 height: 50,
               ),
@@ -241,6 +265,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> startRecording() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final Map<String, dynamic> data = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((value) => value.data()!);
+
+    if (data['speechSummarisationUsesLeft'] as int <= 0) {
+      BotToast.showText(text: 'You have no uses left');
+      return;
+    }
+
     await Permission.microphone.request();
     await Permission.storage.request();
 
@@ -300,5 +336,13 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
 
     context.read<TranscribeBloc>().add(TranscribeStarted(path!));
+
+    // decrement speechSummarisationUsesLeft on firestore
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({
+      'speechSummarisationUsesLeft': FieldValue.increment(-1),
+    });
   }
 }
