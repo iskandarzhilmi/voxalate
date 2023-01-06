@@ -1,7 +1,7 @@
 name: voxalate
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.0.2+3
+version: 1.0.3+5
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
@@ -27,6 +27,7 @@ dependencies:
   path_provider: ^2.0.11
   permission_handler: ^10.0.2
   shimmer: ^2.0.0
+  supabase_flutter: ^1.2.2
 
 dev_dependencies:
   flutter_test:

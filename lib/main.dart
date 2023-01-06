@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:voxalate/firebase_options.dart';
 import 'package:voxalate/injection.dart' as dependency_injection;
 import 'package:voxalate/presentation/bloc/transcribe_bloc.dart';
