@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:voxalate/data/data_sources/remote_data_source.dart';
 import 'package:voxalate/domain/entities/transcribe_output.dart';
 import 'package:voxalate/domain/repositories/repository.dart';
@@ -32,8 +34,16 @@ class RepositoryImplementation implements Repository {
 
       final summary = await remoteDataSource.getSummary(englishText);
 
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'minutesLeft': FieldValue.increment(-1),
+      });
+
       return Right(
         TranscribeOutput(
+          detectedLanguage: prediction.output!.detectedLanguage!,
           transcription: prediction.output!.transcription!,
           translation: prediction.output!.translation,
           summary: summary.choices!.first.text,

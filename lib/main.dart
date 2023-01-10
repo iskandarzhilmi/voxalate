@@ -16,7 +16,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  FirebaseAuth.instance.authStateChanges().listen((user) {
     if (user == null) {
       runApp(LoginPage());
     } else {
@@ -42,10 +42,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
             primary: const Color(0xFF25B2C2),
-            // secondary: const Color(0xFFE0E0E0),
             secondary: const Color(0xFF2B3C96),
           ),
-          // accentColor: const Color(0XFF2D2D2D),
         ),
         home: const HomePage(title: 'Voxalate - Transcribe and Translate'),
       ),
@@ -62,10 +60,8 @@ class LoginPage extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color(0xFF25B2C2),
-          // secondary: const Color(0xFFE0E0E0),
           secondary: const Color(0xFF2B3C96),
         ),
-        // accentColor: const Color(0XFF2D2D2D),
       ),
       home: Scaffold(
         appBar: AppBar(
@@ -267,15 +263,6 @@ class _SignUpFormState extends State<SignUpForm> {
                             email: _emailController.text,
                             password: _passwordController.text,
                           );
-
-                          // create a firestore user inside /users collection
-                          await FirebaseFirestore.instance
-                              .collection('users')
-                              .doc(userCredential.user?.uid)
-                              .set({
-                            'isPaidUser': false,
-                            'speechSummarisationUsesLeft': 10,
-                          });
 
                           // Show a toast notification to confirm the login was successful.
                           BotToast.showText(

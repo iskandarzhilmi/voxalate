@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
@@ -10,12 +9,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sound/flutter_sound.dart';
-import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:voxalate/data/models/open_ai_completion_model.dart';
-import 'package:voxalate/data/models/prediction_model.dart';
 import 'package:voxalate/presentation/bloc/transcribe_bloc.dart';
+import 'package:voxalate/presentation/widgets/recorder_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -56,6 +53,37 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      persistentFooterAlignment: AlignmentDirectional.center,
+      persistentFooterButtons: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(10),
+          child: Stack(
+            children: [
+              Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: InkWell(
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                  },
+                  child: Icon(
+                    Icons.logout,
+                    color: Colors.grey[400],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional.center,
+                child: RecorderButton(
+                  isRecording: isRecording,
+                  startRecording: startRecording,
+                  stopRecording: stopRecording,
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -83,38 +111,11 @@ class _HomePageState extends State<HomePage> {
                             FirebaseAuth.instance.currentUser!.uid,
                       )
                       .first
-                      .get('speechSummarisationUsesLeft');
+                      .get('minutesLeft');
                   return Text(
                     'Usage left: ${usageLeft.toString()}',
                   );
                 },
-              ),
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    IconButton(
-                      iconSize: 50,
-                      onPressed: () {
-                        if (isRecording) {
-                          stopRecording();
-                        } else {
-                          startRecording();
-                        }
-                      },
-                      icon: isRecording
-                          ? const Icon(
-                              Icons.stop,
-                            )
-                          : const Icon(
-                              Icons.mic,
-                            ),
-                    ),
-                  ],
-                ),
               ),
               const SizedBox(
                 height: 50,
@@ -122,7 +123,10 @@ class _HomePageState extends State<HomePage> {
               BlocBuilder<TranscribeBloc, TranscribeState>(
                 builder: (context, state) {
                   if (state is TranscribeInitial) {
-                    return const Text('Press the button to start recording');
+                    return SizedBox(
+                      width: double.infinity,
+                      child: const Text('Press the button to start recording'),
+                    );
                   } else if (state is TranscribeLoading) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -219,6 +223,23 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(
                             height: 20,
                           ),
+                          // detected language
+                          const Text(
+                            'Detected Language',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SelectableText(
+                            state.transcribeOutput.detectedLanguage
+                                .split(' ')
+                                .map((word) =>
+                                    word[0].toUpperCase() + word.substring(1))
+                                .join(' '),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           const Text(
                             'Summary',
                             style: TextStyle(
@@ -235,19 +256,6 @@ class _HomePageState extends State<HomePage> {
                     return const Text('Something went wrong');
                   }
                 },
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // context.read<AuthenticationBloc>().add(LoggedOut());
-                  FirebaseAuth.instance.signOut();
-                },
-                child: const Text('Sign Out'),
               ),
               const SizedBox(
                 height: 100,
@@ -272,7 +280,7 @@ class _HomePageState extends State<HomePage> {
         .get()
         .then((value) => value.data()!);
 
-    if (data['speechSummarisationUsesLeft'] as int <= 0) {
+    if (data['minutesLeft'] as int <= 0) {
       BotToast.showText(text: 'You have no uses left');
       return;
     }
@@ -336,13 +344,5 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
 
     context.read<TranscribeBloc>().add(TranscribeStarted(path!));
-
-    // decrement speechSummarisationUsesLeft on firestore
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({
-      'speechSummarisationUsesLeft': FieldValue.increment(-1),
-    });
   }
 }
