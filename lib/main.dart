@@ -1,10 +1,10 @@
+import 'dart:async';
+
 import 'package:bot_toast/bot_toast.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:voxalate/firebase_options.dart';
 import 'package:voxalate/injection.dart' as dependency_injection;
 import 'package:voxalate/presentation/bloc/transcribe_bloc.dart';
@@ -17,36 +17,52 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseAuth.instance.authStateChanges().listen((user) {
-    if (user == null) {
-      runApp(LoginPage());
-    } else {
-      runApp(const MyApp());
-    }
+    runApp(
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => dependency_injection.locator<TranscribeBloc>(),
+          )
+        ],
+        child: MaterialApp(
+          builder: BotToastInit(),
+          title: 'Voxalate',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: const Color(0xFF25B2C2),
+              secondary: const Color(0xFF2B3C96),
+            ),
+          ),
+          home: MyApp(),
+        ),
+      ),
+    );
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => dependency_injection.locator<TranscribeBloc>(),
-        )
-      ],
-      child: MaterialApp(
-        builder: BotToastInit(),
-        title: 'Voxalate',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch().copyWith(
-            primary: const Color(0xFF25B2C2),
-            secondary: const Color(0xFF2B3C96),
-          ),
-        ),
-        home: const HomePage(title: 'Voxalate - Transcribe and Translate'),
-      ),
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data!.emailVerified) {
+            return HomePage();
+          } else {
+            return PendingEmailVerificationPage();
+          }
+        } else {
+          return LoginPage();
+        }
+      },
     );
   }
 }
@@ -54,24 +70,14 @@ class MyApp extends StatelessWidget {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      builder: BotToastInit(),
-      title: 'Voxalate Login',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: const Color(0xFF25B2C2),
-          secondary: const Color(0xFF2B3C96),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Voxalate Login'),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Voxalate Login'),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: LoginForm(),
-          ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: LoginForm(),
         ),
       ),
     );
@@ -213,7 +219,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   controller: _nameController,
                   decoration: InputDecoration(
                     labelText: 'Name',
-                    hintText: 'Enter your full name',
+                    hintText: 'Enter your first name',
                   ),
                   validator: (value) {
                     if (value?.isEmpty ?? true) {
@@ -304,8 +310,115 @@ class _SignUpFormState extends State<SignUpForm> {
       password: password,
     );
 
+    await userCredential.user?.sendEmailVerification();
+
     await userCredential.user?.updateDisplayName(name);
 
+    // await FirebaseFirestore.instance
+    //     .collection('users')
+    //     .doc(userCredential.user?.uid)
+    //     .update({
+    //   'name': name,
+    // });
+
+    // check the document every 1 second until the document is created then update the name
+
     return userCredential;
+  }
+}
+
+class PendingEmailVerificationPage extends StatefulWidget {
+  const PendingEmailVerificationPage({super.key});
+
+  @override
+  State<PendingEmailVerificationPage> createState() =>
+      _PendingEmailVerificationPageState();
+}
+
+class _PendingEmailVerificationPageState
+    extends State<PendingEmailVerificationPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Voxalate'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Please verify your email address',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'We have sent you an email with a link to verify your email address. Please click on the link to verify your email address.',
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  BotToast.showLoading();
+                  await FirebaseAuth.instance.currentUser?.reload();
+                  if (FirebaseAuth.instance.currentUser?.emailVerified ??
+                      false) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    );
+                  } else {
+                    BotToast.showText(
+                      text: 'Please verify your email address',
+                      duration: Duration(seconds: 3),
+                    );
+                  }
+                } catch (e) {
+                  BotToast.showText(
+                    text: 'Error verifying email: $e',
+                    duration: Duration(seconds: 3),
+                  );
+                } finally {
+                  BotToast.closeAllLoading();
+                }
+              },
+              child: Text('Verify Email'),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  BotToast.showLoading();
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(),
+                    ),
+                  );
+                } catch (e) {
+                  BotToast.showText(
+                    text: 'Error signing out: $e',
+                    duration: Duration(seconds: 3),
+                  );
+                } finally {
+                  BotToast.closeAllLoading();
+                }
+              },
+              child: Text('Sign Out'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

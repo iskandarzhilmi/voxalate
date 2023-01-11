@@ -15,9 +15,7 @@ import 'package:voxalate/presentation/bloc/transcribe_bloc.dart';
 import 'package:voxalate/presentation/widgets/recorder_button.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
-
-  final String title;
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -51,7 +49,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          'Voxalate',
+        ),
       ),
       persistentFooterAlignment: AlignmentDirectional.center,
       persistentFooterButtons: [
@@ -125,7 +125,10 @@ class _HomePageState extends State<HomePage> {
                   if (state is TranscribeInitial) {
                     return SizedBox(
                       width: double.infinity,
-                      child: const Text('Press the button to start recording'),
+                      child: const Text(
+                        'Press the button to start recording',
+                        textAlign: TextAlign.center,
+                      ),
                     );
                   } else if (state is TranscribeLoading) {
                     return Column(
