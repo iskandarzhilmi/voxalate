@@ -103,7 +103,6 @@ class _HomePageState extends State<HomePage> {
                     return const Text('Loading');
                   }
 
-                  // if document id equals user id, get the usage left
                   final usageLeft = snapshot.data!.docs
                       .where(
                         (element) =>

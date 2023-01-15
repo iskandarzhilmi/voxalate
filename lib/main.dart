@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:voxalate/firebase_options.dart';
 import 'package:voxalate/injection.dart' as dependency_injection;
@@ -49,16 +51,24 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) {
+        log('User is signed in!');
+      } else {
+        log('User is signed out!');
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data!.emailVerified) {
-            return HomePage();
-          } else {
-            return PendingEmailVerificationPage();
-          }
+          return HomePage();
         } else {
           return LoginPage();
         }
@@ -132,7 +142,6 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   try {
-                    // Replace 'email' and 'password' with the user's email and password.
                     BotToast.showLoading();
                     UserCredential userCredential = await loginWithFirebase(
                       email: _emailController.text,
@@ -218,15 +227,36 @@ class _SignUpFormState extends State<SignUpForm> {
                 TextFormField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText: 'Name',
+                    labelText: 'First Name',
                     hintText: 'Enter your first name',
                   ),
                   validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return 'Please enter your name';
+                    if (value!.isEmpty) {
+                      return 'Please enter a name';
                     }
+
+                    if (value.length < 3) {
+                      return 'Please enter more than 3 characters';
+                    }
+
+                    if (value.length > 100) {
+                      return 'Please enter less than 100 characters';
+                    }
+
+                    if (value.contains(RegExp('[0-9]'))) {
+                      return 'Do not enter numbers';
+                    }
+
+                    if (value.contains(
+                        RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]'))) {
+                      return 'Do not enter special characters';
+                    }
+
                     return null;
                   },
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(100),
+                  ],
                 ),
                 TextFormField(
                   controller: _emailController,
@@ -311,17 +341,7 @@ class _SignUpFormState extends State<SignUpForm> {
     );
 
     await userCredential.user?.sendEmailVerification();
-
     await userCredential.user?.updateDisplayName(name);
-
-    // await FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(userCredential.user?.uid)
-    //     .update({
-    //   'name': name,
-    // });
-
-    // check the document every 1 second until the document is created then update the name
 
     return userCredential;
   }
@@ -368,11 +388,15 @@ class _PendingEmailVerificationPageState
                   await FirebaseAuth.instance.currentUser?.reload();
                   if (FirebaseAuth.instance.currentUser?.emailVerified ??
                       false) {
-                    Navigator.pushReplacement(
-                      context,
+                    BotToast.showText(
+                      text: 'Email verified',
+                      duration: Duration(seconds: 3),
+                    );
+                    Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => HomePage(),
                       ),
+                      (route) => false,
                     );
                   } else {
                     BotToast.showText(
@@ -391,20 +415,19 @@ class _PendingEmailVerificationPageState
               },
               child: Text('Verify Email'),
             ),
+
+            //TODO: resend email with a timer
             SizedBox(
               height: 20,
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey,
+              ),
               onPressed: () async {
                 try {
                   BotToast.showLoading();
                   await FirebaseAuth.instance.signOut();
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginPage(),
-                    ),
-                  );
                 } catch (e) {
                   BotToast.showText(
                     text: 'Error signing out: $e',
