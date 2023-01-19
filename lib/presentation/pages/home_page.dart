@@ -95,6 +95,11 @@ class _HomePageState extends State<HomePage> {
               StreamBuilder<QuerySnapshot>(
                 stream: _usersStream,
                 builder: (context, snapshot) {
+                  // if stream is null
+                  if (!snapshot.hasData) {
+                    return CircularProgressIndicator();
+                  }
+
                   if (snapshot.hasError) {
                     return Text(snapshot.error.toString());
                   }
@@ -261,6 +266,14 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(
                 height: 100,
+              ),
+              Text(
+                '© 2023 Voxalate. All rights reserved. Powered by OpenAI',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+                textAlign: TextAlign.center,
               ),
             ],
           ),

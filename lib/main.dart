@@ -18,28 +18,28 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAuth.instance.authStateChanges().listen((user) {
-    runApp(
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => dependency_injection.locator<TranscribeBloc>(),
-          )
-        ],
-        child: MaterialApp(
-          builder: BotToastInit(),
-          title: 'Voxalate',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch().copyWith(
-              primary: const Color(0xFF25B2C2),
-              secondary: const Color(0xFF2B3C96),
-            ),
+
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => dependency_injection.locator<TranscribeBloc>(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        builder: BotToastInit(),
+        title: 'Voxalate',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: const Color(0xFF25B2C2),
+            secondary: const Color(0xFF2B3C96),
           ),
-          home: MyApp(),
         ),
+        home: MyApp(),
       ),
-    );
-  });
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -260,6 +260,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 ),
                 TextFormField(
                   controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     labelText: 'Email',
                     hintText: 'Enter your email address',
@@ -298,6 +299,12 @@ class _SignUpFormState extends State<SignUpForm> {
                             name: _nameController.text,
                             email: _emailController.text,
                             password: _passwordController.text,
+                          );
+
+                          // Pop until the root of the navigator.
+                          Navigator.popUntil(
+                            context,
+                            (route) => route.isFirst,
                           );
 
                           // Show a toast notification to confirm the login was successful.
