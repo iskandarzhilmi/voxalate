@@ -14,6 +14,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:voxalate/presentation/bloc/transcribe_bloc.dart';
 import 'package:voxalate/presentation/widgets/recorder_button.dart';
 
+import '../../main.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -78,6 +80,23 @@ class _HomePageState extends State<HomePage> {
                   isRecording: isRecording,
                   startRecording: startRecording,
                   stopRecording: stopRecording,
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.settings,
+                    color: Colors.grey[400],
+                  ),
                 ),
               ),
             ],
@@ -359,5 +378,209 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
 
     context.read<TranscribeBloc>().add(TranscribeStarted(path!));
+  }
+}
+
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Account',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Email',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                FirebaseAuth.instance.currentUser!.email!,
+                style: const TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Delete Account',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                onPressed: () async {
+                  // ask the user to re-enter their password
+                  final user = FirebaseAuth.instance.currentUser!;
+                  final credential = await showDialog<AuthCredential>(
+                    context: context,
+                    builder: (context) => const ReauthenticateDialog(),
+                  );
+
+                  if (credential != null) {
+                    try {
+                      await user.reauthenticateWithCredential(credential);
+
+                      final confirm = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => ConfirmDeleteDialog(),
+                      );
+
+                      if (confirm != null && confirm) {
+                        await user.delete();
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      BotToast.showText(text: e.message!);
+                    }
+                  }
+                },
+                child: const Text(
+                  'Delete Account',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                'Security',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Sign out',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ReauthenticateDialog extends StatefulWidget {
+  const ReauthenticateDialog({super.key});
+
+  @override
+  State<ReauthenticateDialog> createState() => _ReauthenticateDialogState();
+}
+
+class _ReauthenticateDialogState extends State<ReauthenticateDialog> {
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Reauthenticate'),
+      content: TextField(
+        controller: _passwordController,
+        decoration: const InputDecoration(
+          labelText: 'Password',
+        ),
+        obscureText: true,
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () async {
+            try {
+              BotToast.showLoading();
+              final user = FirebaseAuth.instance.currentUser!;
+              final credential = EmailAuthProvider.credential(
+                email: user.email!,
+                password: _passwordController.text,
+              );
+              Navigator.of(context).pop(credential);
+            } on FirebaseAuthException catch (e) {
+              BotToast.showText(text: e.message!);
+            } finally {
+              BotToast.closeAllLoading();
+            }
+          },
+          child: const Text('Reauthenticate'),
+        ),
+      ],
+    );
+  }
+}
+
+class ConfirmDeleteDialog extends StatelessWidget {
+  const ConfirmDeleteDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Confirm Delete'),
+      content: const Text('Are you sure you want to delete your account?'),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          child: const Text('Delete'),
+        ),
+      ],
+    );
   }
 }
